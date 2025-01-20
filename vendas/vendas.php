@@ -23,11 +23,11 @@ include "../conexao.php";
         <label for="forma_pagamento">Forma de pagamento:</label>
         <select name="forma_pagamento" required>
             <option value="">Selecione...</option>
-            <option value="1">di</option>
-            <option value="2">p</option>
-            <option value="3">d</option>
-            <option value="4">c</option>
-            <option value="5">b</option>
+            <option value="dinheiro">Dinheiro</option>
+            <option value="cartao_debito">cartão débito</option>
+            <option value="cartao_credito">cartao crédito</option>
+            <option value="boleto">boleto</option>
+            <option value="pix">pix</option>
         </select>
 
         <label for="especificacao_venda">Especificação de venda:</label>
@@ -40,6 +40,29 @@ include "../conexao.php";
 
         <input type="submit" value="Salvar">
     </form>
+</div>
+
+<div>
+    <?php 
+    session_start();
+
+    $cnpj =  $_SESSION['cnpj'];
+
+    $consulta = "SELECT * FROM venda WHERE cnpj = ' $cnpj'";
+
+    if ($resp = mysqli_query($conn, $consulta)) {
+        while ($linha = mysqli_fetch_array($resp)) {
+            echo "
+            <p>{$linha['data_venda']}</p>
+            <p>{$linha['itens']}</p>
+            <p>{$linha['quantidade']}</p>
+            <p>{$linha['total']}</p>
+            <p>{$linha['forma_pagamento']}</p>
+            <p>{$linha['especificacao_venda']}</p>
+            ";
+        }
+    }
+    ?>
 </div>
 
 </body>

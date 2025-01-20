@@ -4,21 +4,19 @@ session_start();
 
 $cnpj =  $_SESSION['cnpj'];
 
-$itens = $_POST['itens'];
-$quant = $_POST['quant'];
-$forma_pagamento= $_POST['forma_pagamento'];
-$local = $_POST['local'];
-$especificacao_venda = $_POST['especificacao_venda'];
-$valor = $_POST['valor'];
+$itens = isset($_POST['itens']) ? $_POST['itens'] : null;
+$quant = isset($_POST['quant']) ? $_POST['quant'] : null;
+$forma_pagamento = isset($_POST['forma_pagamento']) ? $_POST['forma_pagamento'] : null;
+$especificacao_venda = isset($_POST['especificacao_venda']) ? $_POST['especificacao_venda'] : null;
+$valor = isset($_POST['valor']) ? $_POST['valor'] : null;
 
-$insert = "INSERT INTO venda (cnpj, itens, quantidade, total, forma_pagamento, especificacao_venda) VALUES ('$cnpj', '$itens', '$quant', '$valor', '$forma_pagamento', '$especificacao_venda')";
+
+$insert = "INSERT INTO venda (cnpj, itens , quantidade, total, forma_pagamento, especificacao_venda) VALUES ('$cnpj', '$itens ', '$quant', '$valor', '$forma_pagamento', '$especificacao_venda')";
 
 if($resultado = mysqli_query($conn, $insert)) {
-    echo "
-    <script>
-    alert('Dados inseridos com sucesso!');
-    location.href = 'vendas.php';
-</script>
+    echo "<script>alert('Venda cadastrada com sucesso! ATUALIZE IMEDIATAMENTE O ESTOQUE!!!!'); 
+    location.href = 'vendas.php'; 
+      </script>
 ";
 } else {
 echo "<script>alert('Erro ao inserir os dados!'); 
