@@ -27,7 +27,7 @@ $nome = $_SESSION['nome'];
     <header>
         <a href="#">Home</a>
         <a href="cadastro de livros/cadastro-livros.php">Cadastro de livros</a>
-        <a href="vendas/vendas">Vendas</a>
+        <a href="vendas/vendas.php">Vendas</a>
         <a href="estoque/estoque">Estoque</a>
         <a href="sair.php"><i class='bx bx-log-out'></i></a>
     </header>
