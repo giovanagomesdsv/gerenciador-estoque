@@ -28,7 +28,7 @@
 
 
         <label for="isbn">ISBN:</label>
-        <input type="number" name="isbn">
+        <input type="text" name="isbn">
 
 
 
