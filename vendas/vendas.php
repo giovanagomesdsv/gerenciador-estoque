@@ -1,11 +1,23 @@
 <?php 
 include "../conexao.php";
+
+session_start();
+
+if (!isset($_SESSION['cnpj'])) {
+    header("Location: login.php");
+    exit;
+}
+
+$cnpj = $_SESSION['cnpj'];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Vendas</title>
 </head>
 <body>
@@ -43,24 +55,34 @@ include "../conexao.php";
 </div>
 
 <div>
-    <?php 
-    session_start();
+<?php
+    
+    $sql = "SELECT * FROM venda WHERE cnpj = ?";
+    $hl = $conn->prepare($sql); 
+    $hl->bind_param("s", $cnpj); // Vincula o parâmetro
+    $hl->execute(); // Executa a consulta
+    $result = $hl->get_result(); // Obtém os resultados
 
-    $cnpj =  $_SESSION['cnpj'];
+    if ($result->num_rows > 0) {
+        while ($venda = $result->fetch_assoc()) {
+            echo "<p><strong>{$venda['data_venda']}</strong></p> <p>{$venda['itens']}</p>
+            <p>{$venda['quantidade']}</p>
+            <p>{$venda['total']}</p>
+            <p>{$venda['forma_pagamento']}</p>
+            <p>{$venda['especificacao_venda']}</p>
+             <div>
+                    <a href='altera-formulario-venda.php?id={$venda['id_venda']}'>
+                        <div class=\"bx bxs-edit-alt\"></div>
+                    </a>
 
-    $consulta = "SELECT * FROM venda WHERE cnpj = ' $cnpj'";
-
-    if ($resp = mysqli_query($conn, $consulta)) {
-        while ($linha = mysqli_fetch_array($resp)) {
-            echo "
-            <p>{$linha['data_venda']}</p>
-            <p>{$linha['itens']}</p>
-            <p>{$linha['quantidade']}</p>
-            <p>{$linha['total']}</p>
-            <p>{$linha['forma_pagamento']}</p>
-            <p>{$linha['especificacao_venda']}</p>
+                    <a href='apaga-venda.php?id={$venda['id_venda']}'>
+                        <div class=\"bx bxs-trash\"></div>
+                    </a>
+                </div>
             ";
         }
+    } else {
+        echo "<p>Nenhuma venda encontrada.</p>";
     }
     ?>
 </div>
