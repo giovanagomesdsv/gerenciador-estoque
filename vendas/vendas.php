@@ -54,6 +54,144 @@ $cnpj = $_SESSION['cnpj'];
     </form>
 </div>
 
+
+
+
+
+
+
+
+
+
+<!--barra de data-->
+<div class="pesquisar">
+        <form action="" method="GET">
+            <h3>Busque por data</h3>
+            <input type="text" name="busca" placeholder=" Ex: 2025-01-21">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+
+    <div class="vendas">
+        <?php
+        if (!isset($_GET['busca']) || empty($_GET['busca'])) {
+            echo "<div class='resultado'></div>";
+        } else {
+            $pesquisa = $conn->real_escape_string($_GET['busca']);
+
+            $code = "SELECT * FROM venda WHERE cnpj = '$cnpj'
+   AND data_venda LIKE '%$pesquisa%'
+                            ";
+
+            $sql_consulta = $conn->query($code) or die("Erro ao consultar: " . $conn->error);
+
+            if ($sql_consulta ->num_rows == 0) {
+                echo "<div class='resultados'><h3>Nenhum resultado encontrado!</h3></div>";
+            } else {
+                while ($venda = mysqli_fetch_array($sql_consulta)) {
+                    echo "<p><strong>{$venda['data_venda']}</strong></p> <p>{$venda['itens']}</p>
+            <p>{$venda['quantidade']}</p>
+            <p>{$venda['total']}</p>
+            <p>{$venda['forma_pagamento']}</p>
+            <p>{$venda['especificacao_venda']}</p>
+             <div>
+                    <a href='altera-formulario-venda.php?id={$venda['id_venda']}'>
+                        <div class=\"bx bxs-edit-alt\"></div>
+                    </a>
+
+                    <a href='apaga-venda.php?id={$venda['id_venda']}'>
+                        <div class=\"bx bxs-trash\"></div>
+                    </a>
+                </div>
+            ";  
+                }
+            }
+        }
+
+
+
+        ?>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--barra de item-->
+<div class="pesquisar">
+        <form action="" method="GET">
+            <h3>Busque por item</h3>
+            <input type="text" name="busca" placeholder=" Ex: é assim que acaba">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+
+    <div class="vendas">
+        <?php
+        if (!isset($_GET['busca']) || empty($_GET['busca'])) {
+            echo "<div class='resultado'></div>";
+        } else {
+            $pesquisa = $conn->real_escape_string($_GET['busca']);
+
+            $code = "SELECT * FROM venda WHERE cnpj = '$cnpj'
+   AND itens LIKE '%$pesquisa%'
+                            ";
+
+            $sql_consulta = $conn->query($code) or die("Erro ao consultar: " . $conn->error);
+
+            if ($sql_consulta ->num_rows == 0) {
+                echo "<div class='resultados'><h3>Nenhum resultado encontrado!</h3></div>";
+            } else {
+                while ($venda = mysqli_fetch_array($sql_consulta)) {
+                    echo "<p><strong>{$venda['data_venda']}</strong></p> <p>{$venda['itens']}</p>
+            <p>{$venda['quantidade']}</p>
+            <p>{$venda['total']}</p>
+            <p>{$venda['forma_pagamento']}</p>
+            <p>{$venda['especificacao_venda']}</p>
+             <div>
+                    <a href='altera-formulario-venda.php?id={$venda['id_venda']}'>
+                        <div class=\"bx bxs-edit-alt\"></div>
+                    </a>
+
+                    <a href='apaga-venda.php?id={$venda['id_venda']}'>
+                        <div class=\"bx bxs-trash\"></div>
+                    </a>
+                </div>
+            ";  
+                }
+            }
+        }
+
+
+
+        ?>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div>
 <?php
     
