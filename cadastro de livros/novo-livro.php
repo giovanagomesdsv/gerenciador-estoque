@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="inserir_form.php" method="POST">
+    <form action="inserir_form.php" method="POST" enctype="multipart/form-data">
         <label for="livro">Nome do livro:</label>
         <input type="text" name="livro">
 
@@ -22,8 +22,8 @@
 
 
 
-        <label for="img_url">Imagem do livro:</label>
-        <input type="text" name="img_url" placeholder="Ex: URL">
+        <label for="arquivo">Selecione um arquivo</label>
+        <input type="file" name="arquivo">
 
 
 

@@ -20,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $livro = isset($_POST['livro']) ? trim($_POST['livro']) : '';
     $autor = isset($_POST['autor']) ? trim($_POST['autor']) : '';
     $slug = isset($_POST['slug']) ? trim($_POST['slug']) : '';
-    $img = isset($_POST['img_url']) ? trim($_POST['img_url']) : '';
     $isbn = isset($_POST['isbn']) ? trim($_POST['isbn']) : '';
     $ano = isset($_POST['ano_publi']) ? trim($_POST['ano_publi']) : '';
     $editora = isset($_POST['editora']) ? trim($_POST['editora']) : '';
@@ -70,13 +69,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    if (isset($_FILES['arquivo'])) {
+        $arquivo = $_FILES['arquivo'];
+    
+        if ($arquivo['error'])
+            die("Falha ao enviar arquivo");
+    
+        if ($arquivo['size'] > 2097152) 
+            die("Arquivo muito grande! Max: 2MB");
+    
+            $pasta = "img-livro/";
+    
+            $nomeDoArquivo = $arquivo['name'];
+            $novoNomeDoArquivo = uniqid();
+            $extensao = strtolower(pathinfo($nomeDoArquivo, PATHINFO_EXTENSION));
+    
+        if($extensao != "jpg" && $extensao != 'png')
+           die("Tipo de arquivo não aceito!");
+    
+           $path = $pasta . $novoNomeDoArquivo . "." . $extensao;
+    
+           $deu_certo = move_uploaded_file($arquivo["tmp_name"], $path);
+    }
+
     // Insere os dados do livro
-    $sql = "INSERT INTO livro (cnpj, id_escritor, slug, titulo, imagem_url, isbn,ano_publicacao, editora, dimensoes, idioma, numero_pag, tipo, classificacao_idade, genero, sinopse, especificacao_liv, preco, form_pagamento, especificacao_pagamento, forma_obt, especificação_obt, estoque
+    $sql = "INSERT INTO livro (cnpj, id_escritor, slug, titulo,path, isbn,ano_publicacao, editora, dimensoes, idioma, numero_pag, tipo, classificacao_idade, genero, sinopse, especificacao_liv, preco, form_pagamento, especificacao_pagamento, forma_obt, especificação_obt, estoque
 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
-        $stmt->bind_param('ssssssisssissssssssssi', $cnpj, $id_escritor, $slug, $livro, $img, $isbn, $ano,  $editora, $dimensoes, $idioma, $pag, $tipo, $idade, $genero, $sinopse, $especifi_livro, $preco,  $forma_pag, $especifi_pag, $forma_obt, $forma_obt, $estoque);
+        $stmt->bind_param('ssssssisssissssssssssi', $cnpj, $id_escritor, $slug, $livro, $path, $isbn, $ano,  $editora, $dimensoes, $idioma, $pag, $tipo, $idade, $genero, $sinopse, $especifi_livro, $preco,  $forma_pag, $especifi_pag, $forma_obt, $forma_obt, $estoque);
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
