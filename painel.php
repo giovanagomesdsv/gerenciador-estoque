@@ -99,9 +99,10 @@ echo "Valor total das vendas neste mês: R$ " . number_format($valorTotal, 2, ',
 
 $stmt->close();
 $execucao->close();
-$conn->close();
+
 ?>
 
+        
 
 </body>
 </html>
