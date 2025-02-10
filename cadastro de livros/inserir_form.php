@@ -82,13 +82,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nomeDoArquivo = $arquivo['name'];
             $novoNomeDoArquivo = uniqid();
             $extensao = strtolower(pathinfo($nomeDoArquivo, PATHINFO_EXTENSION));
+            $pasta = "img-livro/";
     
         if($extensao != "jpg" && $extensao != 'png')
            die("Tipo de arquivo não aceito!");
     
            $path = $novoNomeDoArquivo . "." . $extensao;
     
-           $deu_certo = move_uploaded_file($arquivo["tmp_name"], $path);
+           $caminho = $pasta . $novoNomeDoArquivo . "." . $extensao;
+    
+           $deu_certo = move_uploaded_file($arquivo["tmp_name"], $caminho);
     }
 
     // Insere os dados do livro
@@ -97,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
-        $stmt->bind_param('ssssssisssissssssssssi', $cnpj, $id_escritor, $slug, $livro, $path, $isbn, $ano,  $editora, $dimensoes, $idioma, $pag, $tipo, $idade, $genero, $sinopse, $especifi_livro, $preco,  $forma_pag, $especifi_pag, $forma_obt, $forma_obt, $estoque);
+        $stmt->bind_param('ssssssisssissssssssssi', $cnpj, $id_escritor, $slug, $livro, $path, $isbn, $ano,  $editora, $dimensoes, $idioma, $pag, $tipo, $idade, $genero, $sinopse, $especifi_livro, $preco,  $forma_pag, $especifi_pag, $forma_obt, $especifi_obt, $estoque);
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {

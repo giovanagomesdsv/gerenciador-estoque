@@ -47,7 +47,7 @@ include "../conexao.php";
                     echo "
                     <div>
                 <div>
-                   <img src='{$linha['path']}' alt='Foto do livro'>
+                   <img src='img-livro/{$linha['path']}' alt='Foto do livro'>
                     <h3>{$linha['titulo']}</h3>
                     <p> {$linha['nome']}</p>
                     <p>{$linha['visualizacoes']}</p>
@@ -155,7 +155,7 @@ WHERE
             echo "
               <div>
                 <div>
-                   <img src='{$linha['path']}' alt='Foto do livro'>
+                   <img src='img-livro/{$linha['path']}' alt='Foto do livro'>
                     <h3>{$linha['titulo']}</h3>
                     <p> {$linha['nome']}</p>
                     <p>{$linha['visualizacoes']}</p>
