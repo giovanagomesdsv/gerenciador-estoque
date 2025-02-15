@@ -11,6 +11,7 @@ include "conexao.php";
     <title>Gerenciador de estoque</title>
 </head>
 <body>
+    <h1>teste</h1>
 <form action="login.php" method="POST">
     <label for="cnpj">CNPJ:</label>
     <input type="text" name="cnpj" required>
