@@ -15,7 +15,7 @@ include "conexao.php";
     <label for="cnpj">CNPJ:</label>
     <input type="text" name="cnpj" required>
     <label for="senha">Senha:</label>
-    <input type="password" name="senha" required>
+    <input type="password" name="senha">
     <button type="submit">Entrar</button>
 </form>
     

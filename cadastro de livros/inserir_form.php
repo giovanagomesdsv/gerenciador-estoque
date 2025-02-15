@@ -33,8 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $especifi_livro = isset($_POST['especifi_livro']) ? trim($_POST['especifi_livro']) : '';
     $preco = isset($_POST['preco']) ? trim($_POST['preco']) : '';
     $estoque = isset($_POST['estoque']) ? trim($_POST['estoque']) : '';
-    $especifi_pag = isset($_POST['especifi_pag']) ? trim($_POST['especifi_pag']) : '';
-    $especifi_obt = isset($_POST['especifi_obt']) ? trim($_POST['especifi_obt']) : '';
     $forma_obt = isset($_POST['forma_obt']) ? implode(', ', $_POST['forma_obt']) : '';
     $forma_pag = isset($_POST['forma_pag']) ? implode(', ', $_POST['forma_pag']) : '';
 
@@ -95,12 +93,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Insere os dados do livro
-    $sql = "INSERT INTO livro (cnpj, id_escritor, slug, titulo,path, isbn,ano_publicacao, editora, dimensoes, idioma, numero_pag, tipo, classificacao_idade, genero, sinopse, especificacao_liv, preco, form_pagamento, especificacao_pagamento, forma_obt, especificação_obt, estoque
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO livro (cnpj, id_escritor, slug, titulo,path, isbn,ano, editora, dimensoes, idioma, paginas, tipo, classificacao_idade, genero, sinopse, especificacao_livro, preco, forma_pagamento, forma_obt, estoque
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
-        $stmt->bind_param('ssssssisssissssssssssi', $cnpj, $id_escritor, $slug, $livro, $path, $isbn, $ano,  $editora, $dimensoes, $idioma, $pag, $tipo, $idade, $genero, $sinopse, $especifi_livro, $preco,  $forma_pag, $especifi_pag, $forma_obt, $especifi_obt, $estoque);
+        $stmt->bind_param('ssssssisssissssssssi', $cnpj, $id_escritor, $slug, $livro, $path, $isbn, $ano,  $editora, $dimensoes, $idioma, $pag, $tipo, $idade, $genero, $sinopse, $especifi_livro, $preco,  $forma_pag, $forma_obt, $estoque);
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {

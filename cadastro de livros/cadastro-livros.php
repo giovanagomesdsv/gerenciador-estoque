@@ -63,22 +63,21 @@ include "../conexao.php";
                 <div>
                     <p>{$linha['slug']}</p>
                     <p>{$linha['isbn']}</p>
-                    <p>{$linha['ano_publicacao']}</p>
+                    <p>{$linha['ano']}</p>
                     <p>{$linha['editora']}</p>
                     <p>{$linha['dimensoes']}</p>
                     <p>{$linha['idioma']}</p>
-                    <p>{$linha['numero_pag']}</p>
+                    <p>{$linha['paginas']}</p>
                     <p>{$linha['tipo']}</p>
                     <p>{$linha['classificacao_idade']}</p>
                     <p>{$linha['genero']}</p>
-                    <p>{$linha['numero_pag']}</p>
                     <p>{$linha['sinopse']}</p>
                     <p>{$linha['especificacao_liv']}</p>
                     <p>{$linha['preco']}</p>
-                    <p>{$linha['form_pagamento']}</p>
+                    <p>{$linha['forma_pagamento']}</p>
                     <p>{$linha['especificacao_pagamento']}</p>
                     <p>{$linha['forma_obt']}</p>
-                    <p>{$linha['especificação_obt']}</p>
+                    
                 </div>
                
             </div>
@@ -120,23 +119,21 @@ include "../conexao.php";
     livro.titulo, 
     livro.path, 
     livro.isbn, 
-    livro.ano_publicacao, 
+    livro.ano, 
     livro.editora, 
     livro.dimensoes, 
     livro.idioma, 
-    livro.numero_pag, 
+    livro.paginas, 
     livro.tipo, 
     livro.classificacao_idade, 
     livro.genero, 
     livro.sinopse, 
-    livro.especificacao_liv, 
+    livro.especificacao_livro, 
     livro.preco, 
-    livro.form_pagamento, 
-    livro.especificacao_pagamento, 
+    livro.forma_pagamento, 
+    livro.obs_adicionais, 
     livro.forma_obt, 
-    livro.especificação_obt, 
     livro.estoque, 
-    livro.visualizacoes, 
     escritor.nome 
 FROM 
     livro 
@@ -158,7 +155,6 @@ WHERE
                    <img src='img-livro/{$linha['path']}' alt='Foto do livro'>
                     <h3>{$linha['titulo']}</h3>
                     <p> {$linha['nome']}</p>
-                    <p>{$linha['visualizacoes']}</p>
                     <p>{$linha['preco']}</p>
                 </div>
 
@@ -171,22 +167,19 @@ WHERE
                 <div>
                     <p>{$linha['slug']}</p>
                     <p>{$linha['isbn']}</p>
-                    <p>{$linha['ano_publicacao']}</p>
+                    <p>{$linha['ano']}</p>
                     <p>{$linha['editora']}</p>
                     <p>{$linha['dimensoes']}</p>
                     <p>{$linha['idioma']}</p>
-                    <p>{$linha['numero_pag']}</p>
+                    <p>{$linha['paginas']}</p>
                     <p>{$linha['tipo']}</p>
                     <p>{$linha['classificacao_idade']}</p>
                     <p>{$linha['genero']}</p>
-                    <p>{$linha['numero_pag']}</p>
                     <p>{$linha['sinopse']}</p>
-                    <p>{$linha['especificacao_liv']}</p>
+                    <p>{$linha['especificacao_livro']}</p>
                     <p>{$linha['preco']}</p>
-                    <p>{$linha['form_pagamento']}</p>
-                    <p>{$linha['especificacao_pagamento']}</p>
+                    <p>{$linha['forma_pagamento']}</p>
                     <p>{$linha['forma_obt']}</p>
-                    <p>{$linha['especificação_obt']}</p>
                 </div>
                
             </div>

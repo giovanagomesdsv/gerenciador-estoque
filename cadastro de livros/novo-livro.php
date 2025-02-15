@@ -163,10 +163,6 @@
 
 
 
-        <label for="especifi_pag">Especificação de pagamento:</label>
-        <input type="text" name="especifi_pag">
-
-
 
         <label for="forma_obt">Forma de obtenção:</label>
         <input type="checkbox" name="forma_obt[]" value="retirada no local"> retirada no local
@@ -174,9 +170,6 @@
         <input type="checkbox" name="forma_obt[]" value="entrega por conta da loja"> entrega por conta da loja
 
 
-
-        <label for="especifi_obt">Especificação de obtenção:</label>
-        <input type="text" name="especifi_obt">
 
 
 
